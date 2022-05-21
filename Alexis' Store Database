@@ -1,0 +1,15 @@
+--Create a Store Database--
+
+CREATE TABLE Alexis_Store (id INTEGER PRIMARY KEY, name TEXT, item_type TEXT, price INTEGER, sold INTEGER);
+INSERT INTO Alexis_Store VALUES (1,"Manga","Book",11,5);
+INSERT INTO Alexis_Store VALUES (2,"Laptops","Electronics",100,10);
+INSERT INTO Alexis_Store VALUES (3,"Bananas","Food",2,10);
+INSERT INTO Alexis_Store VALUES (4,"Chips","Food",4,5);
+INSERT INTO Alexis_Store VALUES (5,"TV","Electronics",300,8);
+INSERT INTO Alexis_Store VALUES (6,"Ground Beef","Food",10,6);
+
+--Displaying Database by Price--
+SELECT * FROM Alexis_Store ORDER BY Price;
+
+--Displaying Total Sold from Electronics Department--
+SELECT SUM(sold) FROM Alexis_Store Where item_type = "Electronics"
