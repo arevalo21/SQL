@@ -1,0 +1,33 @@
+--I queried a database with multiple tables to answer different questions.
+
+--How Many orders were placed in January?
+Select Count(orderID) FROM BIT_DB.JanSales;
+
+--How many of the orders were for an iPhone?
+Select Count(orderID) From Bit_DB.JanSales
+Where Product='iPhone';
+
+--Select Account Numbers for all orders in February
+Select acctnum FROM Bit_DB.customers
+Inner Join Bit_DB.FebSales
+On FebSales.orderID=customers.order_id;
+
+--Which Product was the cheapest in January and what was the price?
+Select distinct Product, price from BIT_DB.JanSales
+Order By price ASC LIMIT 1;
+
+--What is the total revenue for each product sold in January
+Select Product, (Sum(Quantity)*price) AS Revenue
+FROM BIT_DB.JanSales
+Group BY Product;
+
+--Which Products were sold in February at 548 Lincoln St, how many were sold, and what was the total rev?
+Select Product, Sum(Quantity) as Quantity, Sum(Quantity)*price as Revenue From Bit_DB.FebSales
+Where location = '548 Lincoln St, Seattle, WA 98101'
+Group by Product;
+
+--How many customers ordered more than 2 products at a time, and what was the avg spent?
+Select count(customers.acctnum),avg(Quantity)*price FROM Bit_DB.FebSales
+Left Join Bit_DB.customers
+On FebSales.orderID=customers.order_id
+Where FebSales.Quantity>2;
